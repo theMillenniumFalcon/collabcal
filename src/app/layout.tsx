@@ -23,6 +23,7 @@ export default function RootLayout({
       appearance={{
         baseTheme: dark,
       }}
+      afterSignOutUrl="/"
     >
       <html lang="en">
         <body className={c}>{children}</body>
