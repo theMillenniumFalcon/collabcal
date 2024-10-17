@@ -67,14 +67,14 @@ export default function Calendar({
       <div className="w-full gap-[1px] flex-grow grid grid-cols-7 grid-rows-5 rounded-b-[0.7rem] overflow-hidden">
         {start ? (
           <>
-            {[...Array(start).keys()].map((x, i) => (
+            {[Array(start).keys()].map((x, i) => (
               <DateBox empty={true} key={`start-${i}`} />
             ))}
           </>
         ) : null}
         {mid ? (
           <>
-            {[...Array(mid).keys()].map((x, i) => (
+            {[Array(mid).keys()].map((x, i) => (
               <DateBox
                 key={`mid-${i}`}
                 empty={false}
@@ -88,7 +88,7 @@ export default function Calendar({
         ) : null}
         {end ? (
           <>
-            {[...Array(end).keys()].map((x, i) => (
+            {[Array(end).keys()].map((x, i) => (
               <DateBox empty={true} key={`end-${i}`} />
             ))}
           </>
