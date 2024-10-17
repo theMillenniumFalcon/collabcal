@@ -3,10 +3,10 @@ import Link from "next/link"
 
 export default function DashboardLayout({
   children,
-  modal,
+  // modal,
 }: {
   children: React.ReactNode
-  modal: React.ReactNode
+  // modal: React.ReactNode
 }) {
   return (
     <>
@@ -30,7 +30,7 @@ export default function DashboardLayout({
         </div>
         {children}
       </main>
-      {modal}
+      {/* {modal} */}
     </>
   )
 }
