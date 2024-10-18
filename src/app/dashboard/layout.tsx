@@ -1,16 +1,14 @@
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+import React from "react";
 
 export default function DashboardLayout({
   children,
-  modal,
 }: {
   children: React.ReactNode;
-  modal: any;
 }) {
   return (
     <>
-      {modal}
       <main className="w-screen min-h-screen flex flex-col">
         <div className="bg-background w-screen flex items-center justify-between md:px-8 xs:px-5 px-3 py-2">
           <div className="flex items-center">
