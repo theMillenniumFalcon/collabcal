@@ -21,9 +21,9 @@ export default function Home() {
           </Link>
         </SignedIn>
         <SignedOut>
-          <Link href="/dashboard">
+          <Link href="/sign-in">
             <Button>
-              Sign In <ArrowRight className="h-4 w-4 ml-1.5" />
+              Sign In with Clerk <ArrowRight className="h-4 w-4 ml-1.5" />
             </Button>
           </Link>
         </SignedOut>
