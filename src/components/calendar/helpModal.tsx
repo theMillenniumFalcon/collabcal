@@ -44,7 +44,7 @@ export default function HelpModal({
               target="_blank"
               rel="noreferrer"
             >
-              <Button variant="outline">
+              <Button variant="ghost">
                 <Github className="h-5 w-5 mr-1.5" />
                 Github
               </Button>

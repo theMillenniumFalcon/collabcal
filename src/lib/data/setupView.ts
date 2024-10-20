@@ -1,5 +1,5 @@
-import prisma from "../prisma";
 import { AuthObject } from "@clerk/backend";
+import prisma from "../prisma";
 
 export const setupView = async (params: {
   month: string;

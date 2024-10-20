@@ -15,10 +15,12 @@ export default async function Dashboard({
   const { month, year } = params;
   const user = auth();
 
-  console.log("user is:", user)
-
   validateRoute(params);
   const view = await setupView({ ...params, user });
+
+  if (!view) {
+    return <>Loading...</>
+  }
 
   return (
     <div className="w-screen md:px-8 xs:px-5 px-3 md:py-8 xs:py-6 py-5 bg-muted flex-grow flex flex-col">
@@ -27,7 +29,7 @@ export default async function Dashboard({
         <HelpButton />
       </div>
       {view ? (
-        <Calendar />
+        <Calendar view={view} month={parseInt(month)} year={parseInt(year)} />
       ) : null}
     </div>
   );
