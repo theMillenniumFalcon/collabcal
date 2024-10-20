@@ -3,13 +3,52 @@ import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { EditorWrapper } from "@/components/editor/editorWrapper";
+import EditorWrapper from "@/components/editor/editorWrapper";
+import { setupView } from "@/lib/data/setupView";
+import { setupDate } from "@/lib/data/setupDate";
 
-export default function EditorLayout() {
+export default async function EditorLayout({
+  params,
+  children,
+}: {
+  params: { id: string };
+  children: React.ReactNode;
+}) {
   const user = auth();
   if (user.userId === null) {
     redirect(`/`);
   }
+
+  const { id } = params;
+
+  const dateParts = id.split("-");
+
+  const date = new Date(
+    parseInt(dateParts[0]),
+    parseInt(dateParts[1]) - 1,
+    parseInt(dateParts[2])
+  );
+
+  const dateString = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const view = await setupView({
+    month: dateParts[1],
+    year: dateParts[0],
+    user,
+  });
+
+  const viewId = id + " " + (user.orgId ?? user.userId);
+
+  const dateData = await setupDate({
+    day: dateParts[2],
+    month: dateParts[1],
+    year: dateParts[0],
+    view,
+  });
 
   return (
     <main className="w-screen min-h-screen flex flex-col">
@@ -32,7 +71,15 @@ export default function EditorLayout() {
       </div>
 
       <div className="w-full p-8 bg-muted flex-grow flex items-center flex-col">
-        <EditorWrapper />
+        <EditorWrapper
+          roomId={viewId}
+          empty={false}
+          data={dateData}
+          org={user.orgId ? true : false}
+          dateString={dateString}
+        >
+          {children}
+        </EditorWrapper>
       </div>
     </main>
   );
