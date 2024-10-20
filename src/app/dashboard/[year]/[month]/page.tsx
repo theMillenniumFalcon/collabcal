@@ -19,7 +19,11 @@ export default async function Dashboard({
   params: { month: string; year: string };
 }) {
   const { month, year } = params;
+  
   const user = auth();
+  if (user.userId === null) {
+    redirect(`/`);
+  }
 
   validateRoute(params);
   const view = await setupView({ ...params, user });

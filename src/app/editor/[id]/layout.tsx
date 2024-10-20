@@ -1,12 +1,15 @@
 import { auth } from "@clerk/nextjs/server";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import { EditorWrapper } from "@/components/editor/editorWrapper";
 
 export default function EditorLayout() {
   const user = auth();
-  if (user === undefined) return <div>NOT SIGNED IN</div>;
+  if (user.userId === null) {
+    redirect(`/`);
+  }
 
   return (
     <main className="w-screen min-h-screen flex flex-col">
