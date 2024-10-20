@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
@@ -6,6 +7,11 @@ import HelpButton from "@/components/calendar/helpButton";
 import Calendar from "@/components/calendar/calendar";
 
 import { setupView } from "@/lib/data/setupView";
+
+export const metadata: Metadata = {
+  title: "CollabCal • Dashboard",
+  description: "dashboard"
+}
 
 export default async function Dashboard({
   params,

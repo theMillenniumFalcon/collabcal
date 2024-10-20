@@ -21,9 +21,9 @@ const months = [
 ];
 
 const toToday = () => {
-  const d = new Date();
-  const year = d.getFullYear();
-  const month = (d.getMonth() + 1).toString().padStart(2, "0");
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
 
   return `/dashboard/${year}/${month}`;
 };
@@ -42,14 +42,11 @@ export default function DateSelect({
   const handleMinus = () => {
     if (month === 1) {
       const newMonth = "12";
-      // setMonth(12);
       const newYear = year.toString();
-      // setYear(year - 1);
 
       router.push(`/dashboard/${newYear}/${newMonth}`);
     } else {
       const newMonth = (month - 1).toString().padStart(2, "0");
-      // setMonth(month - 1);
       const newYear = year.toString();
 
       router.push(`/dashboard/${newYear}/${newMonth}`);
@@ -58,16 +55,12 @@ export default function DateSelect({
 
   const handlePlus = () => {
     if (month === 12) {
-      // setMonth(1);
       const newMonth = "01";
-      // setYear(year + 1);
       const newYear = year.toString();
 
       router.push(`/dashboard/${newYear}/${newMonth}`);
     } else {
       const newMonth = (month + 1).toString().padStart(2, "0");
-
-      // setMonth(month + 1);
       const newYear = year.toString();
 
       router.push(`/dashboard/${newYear}/${newMonth}`);
@@ -91,7 +84,7 @@ export default function DateSelect({
       >
         <ChevronRight className="w-5 h-5" />
       </button>
-      <Button variant="ghost" size="sm">
+      <Button variant="outline" size="sm">
         <Link href={todayLink}>Today</Link>
       </Button>
     </div>
