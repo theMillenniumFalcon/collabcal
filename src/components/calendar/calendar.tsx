@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Date, MonthView, Task } from "@prisma/client";
 
 import { daysInMonth } from "@/utils/daysInMonth";
@@ -28,6 +28,26 @@ export default function Calendar({
   const end = emptyEndDays(mid, start);
 
   const viewDates = view.dates;
+
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const eventHandler = (e: MouseEvent) => {
+      const bounds = calendarRef.current?.getBoundingClientRect();
+      if (bounds) {
+        const x = e.clientX - bounds.left;
+        const y = e.clientY - bounds.top;
+
+        calendarRef.current?.style.setProperty("--mouse-x", x + "px");
+        calendarRef.current?.style.setProperty("--mouse-y", y + "px");
+      }
+    };
+    window.addEventListener("mousemove", eventHandler);
+
+    return () => {
+      window.removeEventListener("mousemove", eventHandler);
+    };
+  }, []);
 
   return (
     <div

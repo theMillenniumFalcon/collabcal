@@ -5,8 +5,6 @@ import prisma from "../prisma";
 import { Label } from "@prisma/client";
 
 export const createTask = async (id: string, path: string, dateId: string) => {
-    console.log("created");
-
     await prisma.task.create({
         data: {
             id: id,
@@ -29,6 +27,8 @@ export async function updateTask(itemId: string, text: string) {
             text,
         },
     });
+
+    revalidatePath("/dashboard/[id]", "page");
 }
 
 export async function relabelTask(itemId: string, label: Label) {
@@ -40,10 +40,12 @@ export async function relabelTask(itemId: string, label: Label) {
             label,
         },
     });
+
+    revalidatePath("/dashboard/[id]", "page");
 }
 
 export async function checkTask(itemId: string, newState: boolean) {
-    const updated = await prisma.task.update({
+    await prisma.task.update({
         where: {
             id: itemId,
         },
@@ -52,7 +54,7 @@ export async function checkTask(itemId: string, newState: boolean) {
         },
     });
 
-    console.log("checked: ", updated);
+    revalidatePath("/dashboard/[id]", "page");
 }
 
 export async function deleteTask(path: string, itemId: string) {

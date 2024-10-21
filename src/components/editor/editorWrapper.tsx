@@ -4,9 +4,9 @@ import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { useUser } from "@clerk/nextjs";
 import { Date, Task } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 import { useStore } from "@/lib/state";
 import { User } from "@/lib/types";
@@ -22,7 +22,6 @@ type Empty = {
 };
 
 type Props = {
-  modal?: boolean;
   dateString: string;
   children: React.ReactNode;
   data: Date & {
@@ -34,7 +33,7 @@ type Props = {
 };
 
 export default function EditorWrapper(props: Empty | Props) {
-  const { modal, dateString, empty, children } = props;
+  const { dateString, empty, children } = props;
 
   const {
     liveblocks: { enterRoom, leaveRoom, others, status },
@@ -77,20 +76,12 @@ export default function EditorWrapper(props: Empty | Props) {
     <>
       <div className="flex w-full justify-between items-center">
         <div className="space-x-3 flex items-center">
-          {modal ? (
-            <DialogPrimitive.Close className="hover:bg-accent text-accent-foreground h-9 px-3 rounded-md inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background">
+          <Button size="sm" variant="ghost">
+            <Link className="flex items-center" href="/dashboard">
               <ChevronLeft className="w-4 h-4 mr-1 -ml-1" />
-              Back
-            </DialogPrimitive.Close>
-          ) : (
-            <Button size="sm" variant="ghost">
-              <Link className="flex items-center" href="/dashboard">
-                {/* todo link to the correct year/month */}
-                <ChevronLeft className="w-4 h-4 mr-1 -ml-1" />
                 Back
-              </Link>
-            </Button>
-          )}
+            </Link>
+          </Button>
           <div className="text-xl font-bold">{dateString}</div>
         </div>
         {!empty &&
@@ -106,7 +97,6 @@ export default function EditorWrapper(props: Empty | Props) {
               />
             );
           })}
-        {/* <div className="text-xs text-green-900">{JSON.stringify(others)}</div> */}
       </div>
 
       {!empty && props.org ? (
