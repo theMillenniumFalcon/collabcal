@@ -26,7 +26,9 @@ export default function RootLayout({
       afterSignOutUrl="/"
     >
       <html lang="en">
-        <body className={c}>{children}</body>
+        <body className={c}>
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   )

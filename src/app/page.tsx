@@ -2,9 +2,12 @@ import { Button } from "@/components/ui/button"
 import { SignedIn, SignedOut } from "@clerk/nextjs"
 import { ArrowRight, Github } from "lucide-react"
 import Link from "next/link"
+import StarsCanvas from "@/components/starBackground"
 
 export default function Home() {
   return (
+    <>
+    <StarsCanvas />
     <main className="flex flex-col min-h-screen items-center justify-center sm:p-24 xs:p-12 p-6">
       <h1 className="text-center text-4xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-b from-white via-neutral-300 to-neutral-900 py-3">
         CollabCal
@@ -38,5 +41,6 @@ export default function Home() {
         </a>
       </div>
     </main>
+    </>
   )
 }

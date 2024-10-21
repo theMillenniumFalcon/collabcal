@@ -17,13 +17,7 @@ export default function HelpModal({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="bg-muted sm:max-w-[550px]">
         <div className="w-full flex items-start flex-col">
-          <div className="space-x-3 flex items-center">
-            <DialogPrimitive.Close className="hover:bg-accent text-accent-foreground h-9 px-3 rounded-md inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background">
-              <ChevronLeft className="w-4 h-4 mr-1 -ml-1" />
-              Back
-            </DialogPrimitive.Close>
-            <div className="text-xl font-bold">CollabCal - Project Info</div>
-          </div>
+          <div className="text-xl font-bold">CollabCal - Project Info</div>
 
           <div className="w-full space-y-3 text-muted-foreground mt-4">
             <div className="text-sm">
